@@ -49,5 +49,5 @@ setup(
     version="0.1.1",
     zip_safe=False,
     entry_points={"console_scripts": ["landscape-api=landscape_api_py3.__main__:cli"]},
-    package_data={"landscape_api_py3": ["landscape_api_py3/schema.json"]},
+    package_data={"landscape_api_py3": ["landscape_api_py3/schemas.json"]},
 )
