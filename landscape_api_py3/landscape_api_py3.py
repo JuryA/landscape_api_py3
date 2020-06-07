@@ -218,10 +218,7 @@ def run_query(
     )
     method = "POST"
     host, port, path = parse(uri)
-    if port is not None:
-        signed_host = "%s:%d" % (host, port)
-    else:
-        signed_host = host
+    signed_host = "%s:%d" % (host, port) if port is not None else host
     if not path:
         path = "/"
         uri = "%s/" % uri
@@ -270,8 +267,7 @@ def load_schema():
     """
     this_directory = os.path.dirname(os.path.abspath(__file__))
     schema_filename = os.path.join(this_directory, "schemas.json")
-    schema = json.loads(open(schema_filename).read())
-    return schema
+    return json.loads(open(schema_filename).read())
 
 
 def _build_exception(name):
@@ -668,10 +664,9 @@ def api_factory(schema, version=LATEST_VERSION):
         # Make locals and action_name available to the method
         func_globals = func.__globals__.copy()
         func_globals["action_name"] = action_name
-        newfunc = types.FunctionType(
+        return types.FunctionType(
             newcode, func_globals, newname, func_defaults, func.__closure__
         )
-        return newfunc
 
     def _caller(self):
         """Wrapper calling C{API.call} with the proper action name."""
@@ -748,7 +743,7 @@ class API(api_factory(_schema)):
         Calls C{get_computers}, and then the ssh command with the given result.
         """
         data = self.get_computers(query, with_network=True)
-        if not len(data) == 1:
+        if len(data) != 1:
             raise ValueError("Expected one computer as result, got %d" % len(data))
         computer = data[0]
         if not computer.get("network_devices", []):
@@ -924,7 +919,7 @@ class CommandLine(object):
         self.exit = exit
         self.environ = environ
 
-    def main(self, argv, schema):  # noqa
+    def main(self, argv, schema):    # noqa
         """
         @param argv: The list of command line arguments, usually from
             C{sys.argv}.
@@ -1005,10 +1000,7 @@ class CommandLine(object):
         except pycurl.error as e:
             # For some reason pycurl may not populate the error message.  In
             # such cases, we look up the error message via libcurl.
-            if e.args[1] == "":
-                message = curl_strerr(e.args[0])
-            else:
-                message = e.args[1]
+            message = curl_strerr(e.args[0]) if e.args[1] == "" else e.args[1]
             self.stderr.write(message + "\n")
             return self.exit(1)
         except Exception as e:
@@ -1049,10 +1041,7 @@ class CommandLine(object):
             # space-separated tokens without having to be quoted on the
             # command line.
             argname = req_arg["name"].replace("_", "-")
-            if argname == "query":
-                value = " ".join(args.query)
-            else:
-                value = getattr(args, argname)
+            value = " ".join(args.query) if argname == "query" else getattr(args, argname)
             positional_args.append(value)
         for opt_arg in action.optional_args:
             opt_arg_name = opt_arg["name"].replace("_", "-")
@@ -1106,10 +1095,7 @@ class CommandLine(object):
         else:
             ssl_ca_file = self.environ.get("LANDSCAPE_API_SSL_CA_FILE")
 
-        if version == FUTURE_VERSION:
-            api_class = APIv2
-        else:
-            api_class = API
+        api_class = APIv2 if version == FUTURE_VERSION else API
         if schema is not _schema:
             api_class = api_factory(schema, version=version)
 
@@ -1356,10 +1342,7 @@ class CommandLine(object):
         """
         method_name = _lowercase_api_name(name)
         cli_name = schema_action.get("cli_name")
-        if cli_name is None:
-            cmdline_name = method_name.replace("_", "-")
-        else:
-            cmdline_name = cli_name
+        cmdline_name = method_name.replace("_", "-") if cli_name is None else cli_name
         action_doc = schema_action["doc"]
         req_args = [
             parameter
@@ -1373,8 +1356,7 @@ class CommandLine(object):
         ]
         if overridden_method_name:
             method_name = overridden_method_name
-        action = _Action(cmdline_name, method_name, action_doc, req_args, opt_args)
-        return action
+        return _Action(cmdline_name, method_name, action_doc, req_args, opt_args)
 
 
 def main(argv, stdout, stderr, exit, environ, schema=_schema):
