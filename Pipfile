@@ -7,7 +7,7 @@ verify_ssl = true
 python_version = "3.8"
 
 [packages]
-pycurl = "*"
+pycurl = ">=7"
 landscape-api-py3 = {editable = true, path = "."}
 
 [dev-packages]

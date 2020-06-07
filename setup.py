@@ -13,7 +13,7 @@ with open("README.rst") as readme_file:
 with open("HISTORY.rst") as history_file:
     history = history_file.read()
 
-requirements = ["pycurl==7.43.0.5"]
+requirements = ["pycurl>=7"]
 
 # setup_requirements = ['pytest-runner','flake8']
 
@@ -46,7 +46,7 @@ setup(
     test_suite="tests",
     tests_require=test_requirements,
     url="https://github.com/jurya/landscape_api_py3",
-    version="0.1.0",
+    version="0.1.1",
     zip_safe=False,
     entry_points={"console_scripts": ["landscape-api=landscape_api_py3.__main__:cli"]},
     package_data={"landscape_api_py3": ["landscape_api_py3/schema.json"]},
