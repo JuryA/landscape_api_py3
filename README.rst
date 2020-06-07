@@ -7,7 +7,7 @@ Landscape API (Python 3)
         :target: https://pypi.python.org/pypi/landscape_api_py3
 
 .. image:: https://img.shields.io/travis/jurya/landscape_api_py3.svg
-        :target: https://travis-ci.com/jurya/landscape_api_py3
+        :target: https://travis-ci.org/jurya/landscape_api_py3
 
 .. image:: https://readthedocs.org/projects/landscape-api-py3/badge/?version=latest
         :target: https://landscape-api-py3.readthedocs.io/en/latest/?badge=latest
