@@ -1,5 +1,5 @@
 Welcome to Landscape API (Python 3)'s documentation!
-======================================
+====================================================
 
 .. toctree::
    :maxdepth: 2
