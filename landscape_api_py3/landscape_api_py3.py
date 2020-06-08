@@ -1,5 +1,5 @@
 # Copyright 2005-2013 Canonical Limited.  All rights reserved.
-
+# Rewrited to support Python 3.8 by Jiří Altman <jiri.altman@konicaminolta.cz> (c) 2020
 import argparse
 import copy
 import ctypes
@@ -23,6 +23,8 @@ from pprint import pprint
 from urllib.parse import quote, urlparse, urlunparse
 
 import pycurl
+
+from . import __version__
 
 __all__ = ["run_query", "API", "errors"]
 
@@ -919,7 +921,7 @@ class CommandLine(object):
         self.exit = exit
         self.environ = environ
 
-    def main(self, argv, schema):    # noqa
+    def main(self, argv, schema):  # noqa
         """
         @param argv: The list of command line arguments, usually from
             C{sys.argv}.
@@ -1041,7 +1043,9 @@ class CommandLine(object):
             # space-separated tokens without having to be quoted on the
             # command line.
             argname = req_arg["name"].replace("_", "-")
-            value = " ".join(args.query) if argname == "query" else getattr(args, argname)
+            value = (
+                " ".join(args.query) if argname == "query" else getattr(args, argname)
+            )
             positional_args.append(value)
         for opt_arg in action.optional_args:
             opt_arg_name = opt_arg["name"].replace("_", "-")
@@ -1263,7 +1267,10 @@ class CommandLine(object):
         parser_help = parser.format_help()
         parser_help = "\n".join(parser_help.splitlines()[:-1])
         # Build help text
-        help_lines = ["Landscape API client", parser_help]
+        help_lines = [
+            f"Landscape API client (Python 3) - version {__version__}",
+            parser_help,
+        ]
         # Add action docs
         for action in actions:
             help_lines.append("  %s" % action.name)
