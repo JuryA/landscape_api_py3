@@ -14,8 +14,8 @@ Landscape API (Python 3)
         :alt: Documentation Status
 
 
-.. image:: https://pyup.io/repos/github/jurya/landscape_api_py3/shield.svg
-     :target: https://pyup.io/repos/github/jurya/landscape_api_py3/
+.. image:: https://pyup.io/account/repos/github/JuryA/landscape_api_py3/shield.svg
+     :target: https://pyup.io/account/repos/github/JuryA/landscape_api_py3/
      :alt: Updates
 
 
