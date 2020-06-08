@@ -41,6 +41,7 @@ RAW_ACTIONS_LIST = ("get-script-code",)
 
 def curl_strerr(errno):
     """Look up cURL error message by their errno."""
+
     libcurl_so_name = ctypes.util.find_library("curl-gnutls")
     curl_strerr = ctypes.CDLL(libcurl_so_name).curl_easy_strerror
     curl_strerr.restype = ctypes.c_char_p
@@ -56,6 +57,7 @@ class _ErrorsContainer(object):
         """
         Add an exception to this errors container.
         """
+
         error.__module__ = __name__ + ".errors"
         setattr(self, error_name, error)
 
@@ -63,6 +65,7 @@ class _ErrorsContainer(object):
         """
         Find an exception by name. If it's not found, C{None} will be returned.
         """
+
         return getattr(self, error_name, None)
 
 
@@ -119,6 +122,7 @@ def fetch(url, post_body, headers, connect_timeout=30, total_timeout=600, cainfo
 
     @return: The body of the response.
     """
+
     curl = pycurl.Curl()
     input = BytesIO()
 
@@ -159,6 +163,7 @@ def parse(url):
     @type url: C{str}
     @param url: An URL to parse.
     """
+
     lowurl = url.lower()
     if not lowurl.startswith(("http://", "https://")):
         raise SyntaxError("URL must start with 'http://' or 'https://': %s" % (url,))
@@ -199,6 +204,7 @@ def run_query(
     @param ssl_ca_file: Path to the server's SSL Certificate Authority
         certificate. For example, "~/landscape_server_ca.crt".
     """
+
     for key, value in list(params.items()):
         if isinstance(key, str):
             params.pop(key)
@@ -249,6 +255,7 @@ def _get_error_code_name(error_code):
     Get the Python exception name given an error code. If the error code
     doesn't end in "Error", the word "Error" will be appended.
     """
+
     if error_code.endswith("Error"):
         return error_code
     else:
@@ -267,6 +274,7 @@ def load_schema():
     Invoking this method will populate the module-level C{errors} object with
     exception classes based on the schema.
     """
+
     this_directory = os.path.dirname(os.path.abspath(__file__))
     schema_filename = os.path.join(this_directory, "schemas.json")
     return json.loads(open(schema_filename).read())
@@ -287,6 +295,7 @@ def _build_exceptions(schema):
     Given a schema, construct a L{_ErrorsContainer} and populate it with error
     classes based on all the error codes specified in the schema.
     """
+
     errors = _ErrorsContainer()
     for action, version_handlers in list(schema.items()):
         for version, handler in list(version_handlers.items()):
@@ -406,6 +415,7 @@ class _API(object):
         Make a low-level query against the Landscape API, using details
         provided in the L{API} constructor.
         """
+
         result = self._run_query(
             self._access_key,
             self._secret_key,
@@ -423,6 +433,7 @@ class _API(object):
         Invoke an API method, automatically encoding the arguments as defined
         in the schema.
         """
+
         action = self._schema[method][self.version]
         parameters = action["parameters"]
         fields = [(x["name"], x) for x in parameters]
@@ -439,6 +450,7 @@ class _API(object):
         @param arguments: A mapping of field names to actual values to encode.
         @param prefix: The prefix to put on all named parameters encoded.
         """
+
         result = {}
         for parameter_name, parameter_description in fields:
             # Figure out the type of the parameter and how to encode it.
@@ -462,6 +474,7 @@ class _API(object):
         Returns a dictionary of parameters that should be included in the
         request.
         """
+
         if parameter.get("optional") and value == parameter.get("default"):
             return {}
         kind = parameter["type"].replace(" ", "_")
@@ -485,6 +498,7 @@ class _API(object):
         Encode a python unicode object OR, for historical reasons, a datetime
         object, into an HTTP argument.
         """
+
         if isinstance(value, (datetime, date)):
             # This is really dumb compatibility stuff for APIs that aren't
             # properly specifying their type.
@@ -520,6 +534,7 @@ class _API(object):
         Encode a python list OR a comma-separated string into individual
         "foo.N" arguments.
         """
+
         result = {}
         if isinstance(sequence, str):
             sequence = [item.strip() for item in sequence.split(",")]
@@ -536,6 +551,7 @@ class _API(object):
         Mappings andcomma-separated strings of KEY=VALUE pairs are
         supported.
         """
+
         if isinstance(items, str):
             items = {k.strip(): v.strip() for k, v in _parse_csv_mapping_safely(items)}
         elif hasattr(items, "items"):
@@ -573,6 +589,7 @@ class _API(object):
             be returned. Otherwise it will be decoded as json and returned as a
             Python object.
         """
+
         return self.run_query(method, arguments)
 
 
@@ -587,6 +604,7 @@ def api_factory(schema, version=LATEST_VERSION):
         Build callable methods for all actions published through the schema
         that will invoke L{API.call}.
         """
+
         actions = {}
         for action_name in schema:
             action = schema[action_name].get(version)
@@ -622,6 +640,7 @@ def api_factory(schema, version=LATEST_VERSION):
         """
         Generate a python docstring vaguely using pydoc syntax.
         """
+
         doc = inspect.cleandoc(action["doc"]) + "\n"
         for parameter in action["parameters"]:
             pdoc = parameter.get("doc", "Undocumented")
@@ -642,6 +661,7 @@ def api_factory(schema, version=LATEST_VERSION):
         the signature corresponding to C{positional_parameters} and
         C{defaults}.
         """
+
         argcount = len(positional_parameters) + 1
         code = func.__code__
         params = positional_parameters[:]
@@ -672,6 +692,7 @@ def api_factory(schema, version=LATEST_VERSION):
 
     def _caller(self):
         """Wrapper calling C{API.call} with the proper action name."""
+
         self.action_name = None
         # The locals of this function aren't obvious, because _change_function
         # modifies the parameters, and we have to access them with locals().
@@ -737,6 +758,7 @@ class API(api_factory(_schema)):
         """
         Import a GPG key with contents from the given filename.
         """
+
         material = open(filename).read().decode("ascii")
         return self.call("ImportGPGKey", name=name, material=material)
 
@@ -744,6 +766,7 @@ class API(api_factory(_schema)):
         """
         Calls C{get_computers}, and then the ssh command with the given result.
         """
+
         data = self.get_computers(query, with_network=True)
         if len(data) != 1:
             raise ValueError("Expected one computer as result, got %d" % len(data))
@@ -842,6 +865,7 @@ class SchemaParameterAction(argparse.Action):
         Items can contain escaped commas as "\\," and they will be unescaped
         by this method.
         """
+
         items = _parse_csv_list_safely(value)
         return [
             self.parse_argument(parameter["item"], list_item)
@@ -854,6 +878,7 @@ class SchemaParameterAction(argparse.Action):
 
         Keys and values are separated by "=".
         """
+
         keyparam = parameter["key"]
         valueparam = parameter["value"]
         result = {}
@@ -873,6 +898,7 @@ def _parse_csv_list_safely(value):
     Substrings can contain escaped commas as "\\," and they will be
     unescaped by this function.
     """
+
     item = ""
     escaped = False
     for c in value:
@@ -901,6 +927,7 @@ def _parse_csv_mapping_safely(value):
     Substrings can contain escaped commas as "\\," and they will be
     unescaped by this function.
     """
+
     for item in _parse_csv_list_safely(value):
         key, sep, value = item.partition("=")
         if not sep:
@@ -926,6 +953,7 @@ class CommandLine(object):
         @param argv: The list of command line arguments, usually from
             C{sys.argv}.
         """
+
         version = self.environ.get("LANDSCAPE_API_VERSION", LATEST_VERSION)
         actions = self.get_actions(schema, version)
 
@@ -1020,6 +1048,7 @@ class CommandLine(object):
         """
         Format and print an HTTP error in a nice way.
         """
+
         message = error.error_message
         error_code = error.error_code
         if isinstance(message, str):
@@ -1036,6 +1065,7 @@ class CommandLine(object):
         """
         Call a known, supported API action, using methods on L{API}.
         """
+
         positional_args = []
         keyword_args = {}
         for req_arg in action.required_args:
@@ -1061,6 +1091,7 @@ class CommandLine(object):
         Call an arbitrary action specified as raw HTTP arguments, using
         L{API.call_arbitrary}.
         """
+
         action_name = args.action_name
         arguments = {}
         for arg in args.argument:
@@ -1073,6 +1104,7 @@ class CommandLine(object):
         Get an L{API} instance with parameters based on command line arguments
         or environment variables.
         """
+
         if args.key is not None:
             access_key = args.key
         elif "LANDSCAPE_API_KEY" in self.environ:
@@ -1111,6 +1143,7 @@ class CommandLine(object):
         """
         Build an L{argparse.ArgumentParser} for a particular action.
         """
+
         action_parser = argparse.ArgumentParser(
             add_help=False,
             description=action.doc,
@@ -1156,6 +1189,7 @@ class CommandLine(object):
         Build the L{argparse.ArgumentParser} that knows how to handle the
         "call" action.
         """
+
         call_parser = argparse.ArgumentParser(
             add_help=False,
             description="Call an arbitrary Landscape API action.",
@@ -1174,6 +1208,7 @@ class CommandLine(object):
         Build the L{argparse.ArgumentParser} for the toplevel command line
         options.
         """
+
         # Not using argparse subgroups here because the help output gets very
         # messy when you have many subgroups.
         prog = sys.argv[0]
@@ -1237,6 +1272,7 @@ class CommandLine(object):
         @param args: Positional args for the C{parse_args} call.
         @param kwargs: Keyword args for the C{parse_args} call.
         """
+
         old_stdout = sys.stdout
         old_stderr = sys.stderr
         sys.stdout = StringIO()
@@ -1262,6 +1298,7 @@ class CommandLine(object):
         @param actions: The actions available.
         @returns: A formatted help string.
         """
+
         prog = parser.prog
         # Use argparse's help except the last line
         parser_help = parser.format_help()
@@ -1302,6 +1339,7 @@ class CommandLine(object):
         @param schema: The schema, as returned from L{load_schema}.
         @param version: The API version to use.
         """
+
         overridden_apis = API.overridden_apis
         actions = []
         for name, version_handlers in list(schema.items()):
@@ -1347,6 +1385,7 @@ class CommandLine(object):
         """
         Get an L{_Action} instance representing the API action from the schema.
         """
+
         method_name = _lowercase_api_name(name)
         cli_name = schema_action.get("cli_name")
         cmdline_name = method_name.replace("_", "-") if cli_name is None else cli_name
