@@ -1,4 +1,5 @@
 .. highlight:: shell
+
 ========================
 Landscape API (Python 3)
 ========================
@@ -18,6 +19,7 @@ Landscape API (Python 3)
 Client for the Landscape API (Python 3)
 
 * Free software: MIT license
+
 .. * Documentation: https://landscape-api-py3.readthedocs.io.
 
 Features
