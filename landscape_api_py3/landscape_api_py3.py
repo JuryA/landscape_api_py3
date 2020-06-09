@@ -263,7 +263,8 @@ def load_schema():
 
     this_directory = os.path.dirname(os.path.abspath(__file__))
     schema_filename = os.path.join(this_directory, "schemas.json")
-    return json.loads(open(schema_filename).read())
+    with open(schema_filename) as _file:
+        return json.loads(_file.read())
 
 
 def _build_exception(name):
@@ -499,7 +500,7 @@ class _API(object):
         contents = None
         with open(value, "rb") as the_file:
             contents = the_file.read()
-        encoded_contents = b64encode(contents)
+        encoded_contents = b64encode(contents).decode()
         # We send the filename along with the contents of the file.close
         filename = os.path.basename(value)
         payload = filename + "$$" + encoded_contents
@@ -745,7 +746,9 @@ class API(api_factory(_schema)):
         Import a GPG key with contents from the given filename.
         """
 
-        material = open(filename).read().decode("ascii")
+        with open(filename) as _file:
+            material = _file.read()
+
         return self.call("ImportGPGKey", name=name, material=material)
 
     def ssh(self, query, user=None):
