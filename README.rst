@@ -1,8 +1,3 @@
-.. highlight:: shell
-<<<<<<< HEAD
-
-=======
->>>>>>> 62d3a5839f5a73d9bb29838dfda6e61c7f863a90
 ========================
 Landscape API (Python 3)
 ========================
@@ -38,15 +33,13 @@ Known issues
 
 Installation of the package
 ----------------------------
-::
     $ pipx install landscape_api_py3
 
 Usage
 ------
-::
     $ landscape-api [OPTIONS] ACTION [ACTION OPTIONS] [ARGS]
 
-For help::
+For help:
     $ landscape-api --help
 
 Before use it's recommended to configure these ENV VARS: LANDSCAPE_API_KEY, LANDSCAPE_API_SECRET, LANDSCAPE_API_URI
