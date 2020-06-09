@@ -75,5 +75,5 @@ urllib3==1.25.9
 virtualenv==20.0.21
 virtualenv-clone==0.5.4
 watchdog==0.10.2
-wcwidth==0.2.3
+wcwidth==0.2.4
 webencodings==0.5.1
