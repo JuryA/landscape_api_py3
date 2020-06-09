@@ -22,7 +22,7 @@ from io import BytesIO, StringIO
 from pprint import pprint
 from urllib.parse import quote, urlparse, urlunparse
 
-import pycurl
+import requests
 
 from . import __version__
 
@@ -116,44 +116,30 @@ _Action = namedtuple(
 )
 
 
-def fetch(url, post_body, headers, connect_timeout=30, total_timeout=600, cainfo=None):
+def fetch(url, post_body, headers, connect_timeout=30, total_timeout=600, cainfo=True):
     """
-    Wrapper around C{pycurl.Curl}, setting up the proper options and timeout.
+    Wrapper around C{requests.session}, setting up the proper options and timeout.
 
     @return: The body of the response.
     """
 
-    curl = pycurl.Curl()
-    input = BytesIO()
+    session = requests.session()
 
     if headers:
-        curl.setopt(
-            pycurl.HTTPHEADER, ["%s: %s" % pair for pair in sorted(headers.items())]
-        )
+        session.headers.update(headers)
 
-    curl.setopt(pycurl.URL, str(url))
-    curl.setopt(pycurl.POSTFIELDS, post_body)
-    curl.setopt(pycurl.FOLLOWLOCATION, True)
-    curl.setopt(pycurl.MAXREDIRS, 5)
-    curl.setopt(pycurl.CONNECTTIMEOUT, connect_timeout)
-    curl.setopt(pycurl.LOW_SPEED_LIMIT, 1)
-    curl.setopt(pycurl.LOW_SPEED_TIME, total_timeout)
-    curl.setopt(pycurl.NOSIGNAL, 1)
-    curl.setopt(pycurl.WRITEFUNCTION, input.write)
-    curl.setopt(pycurl.DNS_CACHE_TIMEOUT, 0)
-    curl.setopt(pycurl.ENCODING, "gzip,deflate")
-    if cainfo:
-        curl.setopt(pycurl.CAINFO, cainfo)
+    response = session.post(
+        url,
+        params=post_body,
+        allow_redirects=True,
+        timeout=(connect_timeout, total_timeout),
+        verify=cainfo,
+    )
 
-    curl.perform()
+    if not response.ok:
+        raise HTTPError(response.status_code, response.text)
 
-    body = input.getvalue()
-
-    http_code = curl.getinfo(pycurl.HTTP_CODE)
-    if http_code != 200:
-        raise HTTPError(http_code, body)
-
-    return body
+    return response.text
 
 
 def parse(url):
@@ -1027,12 +1013,6 @@ class CommandLine(object):
                 return self.exit(e.error_code)
             else:
                 return self.exit(1)
-        except pycurl.error as e:
-            # For some reason pycurl may not populate the error message.  In
-            # such cases, we look up the error message via libcurl.
-            message = curl_strerr(e.args[0]) if e.args[1] == "" else e.args[1]
-            self.stderr.write(message + "\n")
-            return self.exit(1)
         except Exception as e:
             self.stderr.write(str(e) + "\n")
             return self.exit(1)
@@ -1040,7 +1020,7 @@ class CommandLine(object):
         if args.json_output or action.name in RAW_ACTIONS_LIST:
             # Some of the methods require raw output, for instance the code
             # part of scripts.
-            self.stdout.write(str(result, "ascii") + "\n")
+            self.stdout.write(str(result) + "\n")
         else:
             pprint(result, stream=self.stdout)
 
