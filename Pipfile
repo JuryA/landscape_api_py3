@@ -27,6 +27,7 @@ twine = "*"
 tox-pipenv = "*"
 setuptools = "*"
 travis = "*"
+sphinx-epytext = "*"
 
 [pipenv]
 allow_prereleases = true
