@@ -40,7 +40,7 @@ pluggy==0.13.1
 pre-commit==2.5.0
 py==1.8.1
 pycodestyle==2.6.0
-pycurl==7.43.0.5
+requests
 pyflakes==2.2.0
 Pygments==2.6.1
 pyparsing==2.4.7
