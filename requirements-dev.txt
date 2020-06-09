@@ -16,7 +16,7 @@ coverage==5.1
 distlib==0.3.0
 docutils==0.16
 filelock==3.0.12
-flake8==3.8.2
+flake8==3.8.3
 flake8-mypy==17.8.0
 identify==1.4.19
 idna==2.9
