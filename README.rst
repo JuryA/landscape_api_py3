@@ -1,5 +1,8 @@
 .. highlight:: shell
+<<<<<<< HEAD
 
+=======
+>>>>>>> 62d3a5839f5a73d9bb29838dfda6e61c7f863a90
 ========================
 Landscape API (Python 3)
 ========================
