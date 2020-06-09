@@ -46,7 +46,7 @@ setup(
     test_suite="tests",
     tests_require=test_requirements,
     url="https://github.com/jurya/landscape_api_py3",
-    version="0.3.3",
+    version="0.3.4",
     zip_safe=False,
     entry_points={"console_scripts": ["landscape-api=landscape_api_py3.__main__:cli"]},
     package_data={"landscape_api_py3": ["schemas.json"]},
