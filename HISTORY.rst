@@ -2,8 +2,12 @@
 History
 =======
 
-v0.3.4 (2020-06-09) - First pre-release of landscape-api package
-----------------------------------------------------------------------
+v0.3.5 (2020-06-10)
+-------------------
+* minor fixes
+
+v0.3.4 (2020-06-09)
+-------------------
 * replaced **pycurl** --> **requests**
 
 v0.2.0alpha (2020-06-08) - First pre-release of landscape-api package
