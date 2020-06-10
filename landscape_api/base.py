@@ -265,7 +265,7 @@ def load_schema():
     this_directory = os.path.dirname(os.path.abspath(__file__))
     schema_filename = os.path.join(this_directory, "schemas.json")
     with open(schema_filename) as _file:
-        return json.loads(_file.read())
+        return json.loads(str(_file.read()))
 
 
 def _build_exception(name):
@@ -660,17 +660,33 @@ def api_factory(schema, version=LATEST_VERSION):
         varnames = tuple(varnames)
         co_nlocals = len(varnames)
         func_defaults = tuple(defaults) if defaults else None
-        newcode = code.replace(
-            co_argcount=argcount,
-            co_nlocals=co_nlocals,
-            co_name=newname,
-            co_varnames=varnames,
-        )
-        # newcode = types.CodeType(
-        #     argcount, co_nlocals, code.co_stacksize, code.co_flags,
-        #     code.co_code, code.co_consts, code.co_names, varnames,
-        #     code.co_filename, newname, code.co_firstlineno, code.co_lnotab,
-        #     code.co_freevars, code.co_cellvars)
+
+        try:
+            newcode = code.replace(
+                co_argcount=argcount,
+                co_nlocals=co_nlocals,
+                co_name=newname,
+                co_varnames=varnames,
+            )
+        except Exception:
+            newcode = types.CodeType(
+                argcount,
+                code.co_kwonlyargcount,
+                co_nlocals,
+                code.co_stacksize,
+                code.co_flags,
+                code.co_code,
+                code.co_consts,
+                code.co_names,
+                varnames,
+                code.co_filename,
+                newname,
+                code.co_firstlineno,
+                code.co_lnotab,
+                code.co_freevars,
+                code.co_cellvars,
+            )
+
         # Make locals and action_name available to the method
         func_globals = func.__globals__.copy()
         func_globals["action_name"] = action_name
@@ -1289,7 +1305,7 @@ class CommandLine(object):
         parser_help = "\n".join(parser_help.splitlines()[:-1])
         # Build help text
         help_lines = [
-            f"Landscape API client (Python 3) - version {__version__}",
+            "Landscape API client (Python 3) - version " + __version__,
             parser_help,
         ]
         # Add action docs
