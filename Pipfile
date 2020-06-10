@@ -4,12 +4,14 @@ url = "https://pypi.python.org/simple"
 verify_ssl = true
 
 [requires]
-python_version = "3.8"
+python_version = "3"
 
 [packages]
 requests = "*"
+landscape-api-py3 = {editable = false, path = "."}
 
 [dev-packages]
+landscape-api-py3 = {editable = true, path = "."}
 black = "*"
 flake8 = "*"
 isort = "*"
