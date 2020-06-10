@@ -15,8 +15,6 @@ with open("HISTORY.rst") as history_file:
 
 requirements = ["requests"]
 
-# setup_requirements = ['pytest-runner','flake8']
-
 test_requirements = ["pytest"]
 
 setup(
@@ -28,10 +26,6 @@ setup(
         "Intended Audience :: Developers",
         "License :: OSI Approved :: MIT License",
         "Natural Language :: English",
-        "Programming Language :: Python :: 3",
-        "Programming Language :: Python :: 3.5",
-        "Programming Language :: Python :: 3.6",
-        "Programming Language :: Python :: 3.7",
         "Programming Language :: Python :: 3.8",
     ],
     description="Client for the Landscape API (Python 3)",
@@ -41,13 +35,13 @@ setup(
     include_package_data=True,
     keywords="landscape_api_py3",
     name="landscape_api_py3",
-    packages=find_packages(include=["landscape_api_py3", "landscape_api_py3.*"]),
+    packages=find_packages(include=["landscape_api", "landscape_api.*"]),
     # setup_requires=setup_requirements,
     test_suite="tests",
     tests_require=test_requirements,
     url="https://github.com/jurya/landscape_api_py3",
     version="0.3.5",
     zip_safe=False,
-    entry_points={"console_scripts": ["landscape-api=landscape_api_py3.__main__:cli"]},
+    entry_points={"console_scripts": ["landscape-api=landscape_api.__main__:cli"]},
     package_data={"landscape_api_py3": ["schemas.json"]},
 )

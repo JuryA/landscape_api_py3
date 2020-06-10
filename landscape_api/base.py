@@ -1,5 +1,9 @@
+"""Base module for Landscape API (Python 3)."""
 # Copyright 2005-2013 Canonical Limited.  All rights reserved.
 # Rewrited to support Python 3.8 by Jiří Altman <jiri.altman@konicaminolta.cz> (c) 2020
+
+__all__ = ["run_query", "API", "errors"]
+
 import argparse
 import copy
 import ctypes
@@ -25,9 +29,6 @@ from urllib.parse import quote, urlparse, urlunparse
 import requests
 
 from . import __version__
-
-__all__ = ["run_query", "API", "errors"]
-
 
 LATEST_VERSION = "2011-08-01"
 FUTURE_VERSION = "2013-11-04"
