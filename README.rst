@@ -21,27 +21,59 @@ Client for the Landscape API (Python 3)
 
 Features
 ---------
+
 * easy installation from **PyPI** (you can use **pipenv**, **pip**, **pipex**, **Chocolatey**, ...)
 * working on **Windows** (**pipx** create **landscape-api.exe** shim)
-* working with **Python>=v3.8** (easily **from landscape_api_py3.base import API**)
+* working with **Python>=v3.5** (easily **from landscape_api_py3.base import API**)
 * for quick use can be installed with **pipx install landscape_api_py3**
 
+Quick start
+-----------
+
+Check if you have installed **Python v3.5** and above.
+
+To install Landscape API (Python 3), run this command in your terminal:
+
+On Linux:
+
+.. code-block:: console
+
+    $ pip install landscape-api-py3
+    $ python -m landscape-api --uri https://your-uri-to-ls-api/api --key <your API key> --secret <your API secret> --json get-computers --limit 1
+
+On Windows:
+
+.. code-block:: console
+
+    C:\> pip install landscape-api-py3
+    C:\> python -m landscape-api --uri https://your-uri-to-ls-api/api --key <your API key> --secret <your API secret> --json get-computers --limit 1
+
+or you can use **pipx** (virtual environment will be created automatically):
+
+On Linux:
+
+.. code-block:: console
+
+    $ pip install --user pipx
+    $ pipx ensurepath
+    $ exec $SHELL # Restart your shell to reload PATH
+    $ pipx install landscape-api-py3
+    $ landscape-api --uri https://your-uri-to-ls-api/api --key <your API key> --secret <your API secret> --json get-computers --limit 1
+
+On Windows:
+
+.. code-block:: console
+
+    C:\> pip install --user pipx
+    C:\> pipx ensurepath
+    C:\> REM Restart console window to reload PATH
+    C:\> pipx install landscape-api-py3
+    C:\> landscape-api --uri https://your-uri-to-ls-api/api --key <your API key> --secret <your API secret> --json get-computers --limit 1
+
 Known issues
--------------
+------------
+
 * none (issues with dependencies resolved in v0.3.0)
-
-Installation of the package
-----------------------------
-    $ pipx install landscape_api_py3
-
-Usage
-------
-    $ landscape-api [OPTIONS] ACTION [ACTION OPTIONS] [ARGS]
-
-For help:
-    $ landscape-api --help
-
-Before use it's recommended to configure these ENV VARS: LANDSCAPE_API_KEY, LANDSCAPE_API_SECRET, LANDSCAPE_API_URI
 
 Credits
 -------
