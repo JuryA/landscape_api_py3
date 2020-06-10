@@ -2,6 +2,11 @@
 History
 =======
 
+v0.4.2 (2020-06-10)
+-------------------
+* fixed documentation import bug
+* fixed default CA cert bug
+
 v0.4.1 (2020-06-10)
 -------------------
 * fixed bug with imports - now it's compatible with Canonical **landscape-api**
