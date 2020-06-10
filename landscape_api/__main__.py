@@ -3,7 +3,7 @@
 import os
 import sys
 
-from landscape_api_py3.landscape_api_py3 import main
+from .base import main
 
 
 def cli():

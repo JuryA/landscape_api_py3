@@ -22,8 +22,8 @@ Client for the Landscape API (Python 3)
 Features
 ---------
 * easy installation from **PyPI** (you can use **pipenv**, **pip**, **pipex**, **Chocolatey**, ...)
-* working on **Windows** (**piped** create **landscape-api.exe** shim)
-* working with **Python>=v3.8** (easily **import landscape_api_py3**)
+* working on **Windows** (**pipx** create **landscape-api.exe** shim)
+* working with **Python>=v3.8** (easily **from landscape_api_py3.base import API**)
 * for quick use can be installed with **pipx install landscape_api_py3**
 
 Known issues

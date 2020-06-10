@@ -5,7 +5,7 @@
 
 import unittest
 
-from landscape_api_py3 import landscape_api_py3
+from landscape_api import base
 
 
 class TestLandscape_api_py3(unittest.TestCase):
