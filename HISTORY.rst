@@ -2,6 +2,10 @@
 History
 =======
 
+v0.4.1 (2020-06-10)
+-------------------
+* fixed bug with imports - now it's compatible with Canonical **landscape-api**
+
 v0.3.5 (2020-06-10)
 -------------------
 * minor fixes
