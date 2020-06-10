@@ -177,7 +177,7 @@ def run_query(
     action,
     params,
     uri,
-    ssl_ca_file=None,
+    ssl_ca_file=True,
     version=LATEST_VERSION,
 ):
     """Make a low-level query against the Landscape API.
