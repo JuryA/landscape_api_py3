@@ -48,7 +48,7 @@ clean-test: ## remove test and coverage artifacts
 	rm -fr .pytest_cache
 
 lint: ## check style with flake8
-	flake8 landscape_api_py3 tests
+	flake8 landscape_api tests
 
 test: ## run tests quickly with the default Python
 	pipenv run python -m pytest tests/
@@ -57,15 +57,15 @@ test-all: ## run tests on every Python version with tox
 	tox
 
 coverage: ## check code coverage quickly with the default Python
-	coverage run --source landscape_api_py3 setup.py test
+	coverage run --source landscape_api setup.py test
 	coverage report -m
 	coverage html
 	$(BROWSER) htmlcov/index.html
 
 docs: ## generate Sphinx HTML documentation, including API docs
-	rm -f docs/landscape_api_py3.rst
+	rm -f docs/landscape_api.rst
 	rm -f docs/modules.rst
-	sphinx-apidoc -o docs/ landscape_api_py3
+	sphinx-apidoc -o docs/ landscape_api
 	$(MAKE) -C docs clean
 	$(MAKE) -C docs html
 	$(BROWSER) docs/_build/html/index.html

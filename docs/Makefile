@@ -4,7 +4,7 @@
 # You can set these variables from the command line.
 SPHINXOPTS    =
 SPHINXBUILD   = python -msphinx
-SPHINXPROJ    = landscape_api_py3
+SPHINXPROJ    = landscape_api
 SOURCEDIR     = .
 BUILDDIR      = _build
 

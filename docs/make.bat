@@ -9,7 +9,7 @@ if "%SPHINXBUILD%" == "" (
 )
 set SOURCEDIR=.
 set BUILDDIR=_build
-set SPHINXPROJ=landscape_api_py3
+set SPHINXPROJ=landscape_api
 
 if "%1" == "" goto help
 
