@@ -1,3 +1,5 @@
+[![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2FJuryA%2Flandscape_api_py3.svg?type=shield)](https://app.fossa.com/projects/git%2Bgithub.com%2FJuryA%2Flandscape_api_py3?ref=badge_shield)
+
 ========================
 Landscape API (Python 3)
 ========================
@@ -85,3 +87,7 @@ This package was created with Cookiecutter_ and the `audreyr/cookiecutter-pypack
 .. _`Canonical Ltd.`: https://canonical.com
 .. _Cookiecutter: https://github.com/audreyr/cookiecutter
 .. _`audreyr/cookiecutter-pypackage`: https://github.com/audreyr/cookiecutter-pypackage
+
+
+## License
+[![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2FJuryA%2Flandscape_api_py3.svg?type=large)](https://app.fossa.com/projects/git%2Bgithub.com%2FJuryA%2Flandscape_api_py3?ref=badge_large)
