@@ -1,6 +1,10 @@
+# Copyright (c) 2020 Jiří Altman <jiri.altman@konicaminolta.cz>
+# Copyright (c) 2005-2013 Canonical Limited.  All rights reserved.
+#
+# This software is released under the MIT License.
+# https://opensource.org/licenses/MIT
+
 """Base module for Landscape API (Python 3)."""
-# Copyright 2005-2013 Canonical Limited.  All rights reserved.
-# Rewrited to support Python 3.8 by Jiří Altman <jiri.altman@konicaminolta.cz> (c) 2020
 
 __all__ = ["run_query", "API", "errors"]
 
