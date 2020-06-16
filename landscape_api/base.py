@@ -390,7 +390,7 @@ class _API(object):
     # looked up in the original schema.
     #     Right now it only supports replacing arguments one-for-one, but it
     # could be extended if we need to.
-    overridden_apis = {}
+    overridden_apis = {}  # type: ignore
 
     def __init__(
         self, uri, access_key, secret_key, ssl_ca_file=None, json=False, schema=None
@@ -723,7 +723,7 @@ def api_factory(schema, version=LATEST_VERSION):
     return api_class
 
 
-class API(api_factory(_schema)):
+class API(api_factory(_schema)):  # type: ignore
 
     overridden_apis = {
         "ImportGPGKey": {
@@ -791,7 +791,7 @@ class API(api_factory(_schema)):
         os.execvp("ssh", args)
 
 
-class APIv2(api_factory(_schema, version=FUTURE_VERSION)):
+class APIv2(api_factory(_schema, version=FUTURE_VERSION)):  # type: ignore
     """Development version of the API."""
 
     _run_query = staticmethod(partial(run_query, version=FUTURE_VERSION))
