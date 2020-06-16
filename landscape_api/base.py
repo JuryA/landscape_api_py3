@@ -32,7 +32,7 @@ from urllib.parse import quote, urlparse, urlunparse
 
 import requests
 
-from . import __version__
+from landscape_api import __version__
 
 LATEST_VERSION = "2011-08-01"
 FUTURE_VERSION = "2013-11-04"
