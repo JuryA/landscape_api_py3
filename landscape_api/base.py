@@ -26,7 +26,7 @@ from collections import namedtuple
 from datetime import date, datetime
 from functools import partial
 from hashlib import sha256
-from io import BytesIO, StringIO
+from io import StringIO
 from pprint import pprint
 from urllib.parse import quote, urlparse, urlunparse
 
@@ -42,15 +42,6 @@ FUTURE_VERSION = "2013-11-04"
 # "print" instead of pprint). This is useful for actions that return files, so
 # that you can pipe the output to a file.
 RAW_ACTIONS_LIST = ("get-script-code",)
-
-
-def curl_strerr(errno):
-    """Look up cURL error message by their errno."""
-
-    libcurl_so_name = ctypes.util.find_library("curl-gnutls")
-    curl_strerr = ctypes.CDLL(libcurl_so_name).curl_easy_strerror
-    curl_strerr.restype = ctypes.c_char_p
-    return curl_strerr(errno)
 
 
 class _ErrorsContainer(object):
