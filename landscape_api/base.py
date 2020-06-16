@@ -26,13 +26,13 @@ from collections import namedtuple
 from datetime import date, datetime
 from functools import partial
 from hashlib import sha256
-from io import BytesIO, StringIO
+from io import StringIO
 from pprint import pprint
 from urllib.parse import quote, urlparse, urlunparse
 
 import requests
 
-from . import __version__
+from landscape_api import __version__
 
 LATEST_VERSION = "2011-08-01"
 FUTURE_VERSION = "2013-11-04"
@@ -42,15 +42,6 @@ FUTURE_VERSION = "2013-11-04"
 # "print" instead of pprint). This is useful for actions that return files, so
 # that you can pipe the output to a file.
 RAW_ACTIONS_LIST = ("get-script-code",)
-
-
-def curl_strerr(errno):
-    """Look up cURL error message by their errno."""
-
-    libcurl_so_name = ctypes.util.find_library("curl-gnutls")
-    curl_strerr = ctypes.CDLL(libcurl_so_name).curl_easy_strerror
-    curl_strerr.restype = ctypes.c_char_p
-    return curl_strerr(errno)
 
 
 class _ErrorsContainer(object):
@@ -227,7 +218,7 @@ def run_query(
     )
     to_sign = "%s\n%s\n%s\n%s" % (method, signed_host, path, signed_params)
     digest = hmac.new(
-        secret_key.encode("ascii"), to_sign.encode("ascii"), sha256
+        secret_key.encode("utf-8"), to_sign.encode("utf-8"), sha256
     ).digest()
     signature = b64encode(digest)
     signed_params += "&signature=%s" % quote(signature)
@@ -268,7 +259,7 @@ def load_schema():
 
     this_directory = os.path.dirname(os.path.abspath(__file__))
     schema_filename = os.path.join(this_directory, "schemas.json")
-    with open(schema_filename) as _file:
+    with open(schema_filename, "rt") as _file:
         return json.loads(str(_file.read()))
 
 
@@ -278,7 +269,7 @@ def _build_exception(name):
     class _APIError(APIError):
         pass
 
-    _APIError.__name__ = name
+    _APIError.__name__ = str(name)
     return _APIError
 
 
@@ -390,7 +381,7 @@ class _API(object):
     # looked up in the original schema.
     #     Right now it only supports replacing arguments one-for-one, but it
     # could be extended if we need to.
-    overridden_apis = {}
+    overridden_apis = {}  # type: ignore
 
     def __init__(
         self, uri, access_key, secret_key, ssl_ca_file=None, json=False, schema=None
@@ -411,7 +402,7 @@ class _API(object):
         result = self._run_query(
             self._access_key,
             self._secret_key,
-            action_name,
+            str(action_name),
             arguments,
             self._uri,
             self._ssl_ca_file,
@@ -471,7 +462,7 @@ class _API(object):
             return {}
         kind = parameter["type"].replace(" ", "_")
         handler = getattr(self, "_encode_%s" % (kind,))
-        return handler(parameter, name, value)
+        return handler(parameter, str(name), value)
 
     def _encode_integer(self, parameter, name, arg):
         return {name: str(arg)}
@@ -495,7 +486,7 @@ class _API(object):
             # This is really dumb compatibility stuff for APIs that aren't
             # properly specifying their type.
             return self._encode_date(parameter, name, value)
-        return {name: str(value, "utf-8")}
+        return {name: str(value)}
 
     # These are Unicode types with specific validation.
     _encode_unicode_line = _encode_unicode
@@ -505,11 +496,11 @@ class _API(object):
         contents = None
         with open(value, "rb") as the_file:
             contents = the_file.read()
-        encoded_contents = b64encode(contents).decode()
+        encoded_contents = b64encode(contents).decode("utf-8")
         # We send the filename along with the contents of the file.close
         filename = os.path.basename(value)
         payload = filename + "$$" + encoded_contents
-        return {name: payload.encode("utf-8")}
+        return {name: str(payload)}
 
     def _encode_boolean(self, parameter, name, value):
         return {name: "true" if value else "false"}
@@ -518,8 +509,8 @@ class _API(object):
         if isinstance(value, str):
             # allow people to pass strings, since the server has really good
             # date parsing and can handle lots of different formats.
-            return {name: value}
-        return {name: value.strftime("%Y-%m-%dT%H:%M:%SZ")}
+            return {name: str(value)}
+        return {name: str(value.strftime("%Y-%m-%dT%H:%M:%SZ"))}
 
     def _encode_list(self, parameter, name, sequence):
         """
@@ -623,7 +614,7 @@ def api_factory(schema, version=LATEST_VERSION):
         positional_parameters.extend(optional_parameters)
 
         caller = _change_function(
-            _caller, method_name, positional_parameters, defaults, action_name,
+            _caller, str(method_name), positional_parameters, defaults, action_name,
         )
         caller.__doc__ = _generate_doc(action)
         return caller
@@ -669,7 +660,7 @@ def api_factory(schema, version=LATEST_VERSION):
             newcode = code.replace(
                 co_argcount=argcount,
                 co_nlocals=co_nlocals,
-                co_name=newname,
+                co_name=str(newname),
                 co_varnames=varnames,
             )
         except Exception:
@@ -684,7 +675,7 @@ def api_factory(schema, version=LATEST_VERSION):
                 code.co_names,
                 varnames,
                 code.co_filename,
-                newname,
+                str(newname),
                 code.co_firstlineno,
                 code.co_lnotab,
                 code.co_freevars,
@@ -695,13 +686,14 @@ def api_factory(schema, version=LATEST_VERSION):
         func_globals = func.__globals__.copy()
         func_globals["action_name"] = action_name
         return types.FunctionType(
-            newcode, func_globals, newname, func_defaults, func.__closure__
+            newcode, func_globals, str(newname), func_defaults, func.__closure__
         )
 
     def _caller(self):
         """Wrapper calling C{API.call} with the proper action name."""
 
-        self.action_name = None
+        # TODO: Improve this
+        global action_name
         # The locals of this function aren't obvious, because _change_function
         # modifies the parameters, and we have to access them with locals().
         _args = locals().copy()
@@ -723,7 +715,7 @@ def api_factory(schema, version=LATEST_VERSION):
     return api_class
 
 
-class API(api_factory(_schema)):
+class API(api_factory(_schema)):  # type: ignore
 
     overridden_apis = {
         "ImportGPGKey": {
@@ -767,7 +759,7 @@ class API(api_factory(_schema)):
         Import a GPG key with contents from the given filename.
         """
 
-        with open(filename) as _file:
+        with open(filename, "rt") as _file:
             material = _file.read()
 
         return self.call("ImportGPGKey", name=name, material=material)
@@ -791,7 +783,7 @@ class API(api_factory(_schema)):
         os.execvp("ssh", args)
 
 
-class APIv2(api_factory(_schema, version=FUTURE_VERSION)):
+class APIv2(api_factory(_schema, version=FUTURE_VERSION)):  # type: ignore
     """Development version of the API."""
 
     _run_query = staticmethod(partial(run_query, version=FUTURE_VERSION))
@@ -858,7 +850,7 @@ class SchemaParameterAction(argparse.Action):
     parse_unicode_title = parse_unicode
 
     def parse_file(self, parameter, value):
-        return value
+        return str(value)
 
     def parse_date(self, parameter, value):
         # the server already has a good date parser, and to parse it well
@@ -879,6 +871,8 @@ class SchemaParameterAction(argparse.Action):
         items = _parse_csv_list_safely(value)
         return [
             self.parse_argument(parameter["item"], list_item)
+            # TODO: check if list(...) should be used
+            # list(self.parse_argument(parameter["item"], list_item))
             for list_item in items
             if list_item != ""
         ]
@@ -898,8 +892,9 @@ class SchemaParameterAction(argparse.Action):
             result[key] = value
         return result
 
+    # TODO: Verify
     def parse_data(self, parameter, value):
-        return value
+        return value.decode("utf-8")
 
 
 def _parse_csv_list_safely(value):

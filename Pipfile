@@ -8,10 +8,9 @@ python_version = "3"
 
 [packages]
 requests = "*"
-landscape-api-py3 = {editable = false, path = "."}
+landscape-api-py3 = {editable = true, path = "."}
 
 [dev-packages]
-landscape-api-py3 = {editable = true, path = "."}
 black = "*"
 flake8 = "*"
 isort = "*"
@@ -30,6 +29,7 @@ tox-pipenv = "*"
 setuptools = "*"
 travis = "*"
 sphinx-epytext = "*"
+monkeytype = "*"
 
 [pipenv]
 allow_prereleases = true
