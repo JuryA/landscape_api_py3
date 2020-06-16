@@ -2,6 +2,11 @@
 History
 =======
 
+v0.6.0 (2020-06-17)
+-------------------
+- fix #19
+- minor updates
+
 v0.5.0 (2020-06-11)
 -------------------
 * added support for Python 3.5, 3.6, 3.7, 3.8 and above
