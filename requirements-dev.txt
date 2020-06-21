@@ -62,7 +62,7 @@ more-itertools==8.4.0; python_version >= '3.5'
 
 mypy-extensions==0.4.3
 
-mypy==0.780; python_version >= '3.5'
+mypy==0.781; python_version >= '3.5'
 
 nodeenv==1.4.0
 
