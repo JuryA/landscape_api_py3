@@ -159,10 +159,10 @@
         },
         "cfgv": {
             "hashes": [
-                "sha256:1ccf53320421aeeb915275a196e23b3b8ae87dea8ac6698b1638001d4a486d53",
-                "sha256:c8e8f552ffcc6194f4e18dd4f68d9aef0c0d58ae7e7be8c82bee3c5e9edfa513"
+                "sha256:32e43d604bbe7896fe7c248a9c2276447dbef840feb28fe20494f62af110211d",
+                "sha256:cf22deb93d4bcf92f345a5c3cd39d3d41d6340adc60c78bbbd6588c384fda6a1"
             ],
-            "version": "==3.1.0"
+            "version": "==3.2.0"
         },
         "chardet": {
             "hashes": [
@@ -309,11 +309,11 @@
         },
         "isort": {
             "hashes": [
-                "sha256:145072eedc4927cc9c1f9478f2d83b2fc1e6469df4129c02ef4e8c742207a46c",
-                "sha256:ae3007f72a2e9da36febd3454d8be4b175d6ca17eb765841d5fe3d038aede79d"
+                "sha256:723de131d9ae9d2561844f0ee525ce33a396a11bcda57174f036ed5ab3d6a122",
+                "sha256:cdca22530d093ed16983ba52c41560fa0219d1b958e44fd2ae2995dcc7b785be"
             ],
             "index": "pypi",
-            "version": "==5.1.4"
+            "version": "==5.3.0"
         },
         "jeepney": {
             "hashes": [
@@ -332,10 +332,10 @@
         },
         "keyring": {
             "hashes": [
-                "sha256:3401234209015144a5d75701e71cb47239e552b0882313e9f51e8976f9e27843",
-                "sha256:c53e0e5ccde3ad34284a40ce7976b5b3a3d6de70344c3f8ee44364cc340976ec"
+                "sha256:22df6abfed49912fc560806030051067fba9f0069cffa79da72899aeea4ccbd5",
+                "sha256:e7a17caf40c40b6bb8c4772224a487e4a63013560ed0c521065aeba7ecd42182"
             ],
-            "version": "==21.2.1"
+            "version": "==21.3.0"
         },
         "libcst": {
             "hashes": [
@@ -698,10 +698,10 @@
         },
         "tox": {
             "hashes": [
-                "sha256:c60692d92fe759f46c610ac04c03cf0169432d1ff8e981e8ae63e068d0954fc3",
-                "sha256:f179cb4043d7dc1339425dd49ab1dd8c916246b0d9173143c1b0af7498a03ab0"
+                "sha256:3d914480c46232c2d1a035482242535a26d76cc299e4fd28980c858463206f45",
+                "sha256:5c82e40046a91dbc80b6bd08321b13b4380d8ce3bcb5b62616cb17aaddefbb3a"
             ],
-            "version": "==3.18.0"
+            "version": "==3.18.1"
         },
         "tox-pipenv": {
             "hashes": [
@@ -713,10 +713,10 @@
         },
         "tqdm": {
             "hashes": [
-                "sha256:6baa75a88582b1db6d34ce4690da5501d2a1cb65c34664840a456b2c9f794d29",
-                "sha256:fcb7cb5b729b60a27f300b15c1ffd4744f080fb483b88f31dc8654b082cc8ea5"
+                "sha256:1a336d2b829be50e46b84668691e0a2719f26c97c62846298dd5ae2937e4d5cf",
+                "sha256:564d632ea2b9cb52979f7956e093e831c28d441c11751682f84c86fc46e4fd21"
             ],
-            "version": "==4.48.0"
+            "version": "==4.48.2"
         },
         "travis": {
             "hashes": [
@@ -785,10 +785,10 @@
         },
         "virtualenv": {
             "hashes": [
-                "sha256:688a61d7976d82b92f7906c367e83bb4b3f0af96f8f75bfcd3da95608fe8ac6c",
-                "sha256:8f582a030156282a9ee9d319984b759a232b07f86048c1d6a9e394afa44e78c8"
+                "sha256:7b54fd606a1b85f83de49ad8d80dbec08e983a2d2f96685045b262ebc7481ee5",
+                "sha256:8cd7b2a4850b003a11be2fc213e206419efab41115cc14bca20e69654f2ac08e"
             ],
-            "version": "==20.0.28"
+            "version": "==20.0.30"
         },
         "virtualenv-clone": {
             "hashes": [
