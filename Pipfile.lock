@@ -346,10 +346,10 @@
         },
         "libcst": {
             "hashes": [
-                "sha256:484fc3bf0b9b15773349548a466a36b137fbd94705fac8cdf25734fd8261fa17",
-                "sha256:d514cd36e8da5e1444ec693b65a4b6751781af02496f9a2442c8590eb0d321fc"
+                "sha256:b5185c84f0e4a38409aac59f53a71741bec8c1b1159c874996b3266daafe63e5",
+                "sha256:ca1744d9344f51c2c9226d0472a5a3096f8b39e4fe38441ebc2ba26babd00688"
             ],
-            "version": "==0.3.8"
+            "version": "==0.3.9"
         },
         "markupsafe": {
             "hashes": [
@@ -641,11 +641,11 @@
         },
         "sphinx": {
             "hashes": [
-                "sha256:97dbf2e31fc5684bb805104b8ad34434ed70e6c588f6896991b2fdfd2bef8c00",
-                "sha256:b9daeb9b39aa1ffefc2809b43604109825300300b987a24f45976c001ba1a8fd"
+                "sha256:cf2d5bc3c6c930ab0a1fbef3ad8a82994b1bf4ae923f8098a05c7e5516f07177",
+                "sha256:f7db5b76c42c8b5ef31853c2de7178ef378b985d7793829ec071e120dac1d0ca"
             ],
             "index": "pypi",
-            "version": "==3.1.2"
+            "version": "==3.2.0"
         },
         "sphinx-epytext": {
             "hashes": [
@@ -705,10 +705,10 @@
         },
         "tox": {
             "hashes": [
-                "sha256:3d914480c46232c2d1a035482242535a26d76cc299e4fd28980c858463206f45",
-                "sha256:5c82e40046a91dbc80b6bd08321b13b4380d8ce3bcb5b62616cb17aaddefbb3a"
+                "sha256:17e61a93afe5c49281fb969ab71f7a3f22d7586d1c56f9a74219910f356fe7d3",
+                "sha256:3d94b6921a0b6dc90fd8128df83741f30bb41ccd6cd52d131a6a6944ca8f16e6"
             ],
-            "version": "==3.18.1"
+            "version": "==3.19.0"
         },
         "tox-pipenv": {
             "hashes": [
