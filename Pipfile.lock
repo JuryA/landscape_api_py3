@@ -316,11 +316,11 @@
         },
         "isort": {
             "hashes": [
-                "sha256:723de131d9ae9d2561844f0ee525ce33a396a11bcda57174f036ed5ab3d6a122",
-                "sha256:cdca22530d093ed16983ba52c41560fa0219d1b958e44fd2ae2995dcc7b785be"
+                "sha256:819fa99f2a9323025ade768e94b2e27447cd9b0a64595a90f21595e11151b788",
+                "sha256:a4fb5fffc46494cda15e33a996c8e724f8e3db19682b84cc7c990b57f2941e9f"
             ],
             "index": "pypi",
-            "version": "==5.3.0"
+            "version": "==5.4.1"
         },
         "jeepney": {
             "hashes": [
@@ -346,10 +346,10 @@
         },
         "libcst": {
             "hashes": [
-                "sha256:484fc3bf0b9b15773349548a466a36b137fbd94705fac8cdf25734fd8261fa17",
-                "sha256:d514cd36e8da5e1444ec693b65a4b6751781af02496f9a2442c8590eb0d321fc"
+                "sha256:b5185c84f0e4a38409aac59f53a71741bec8c1b1159c874996b3266daafe63e5",
+                "sha256:ca1744d9344f51c2c9226d0472a5a3096f8b39e4fe38441ebc2ba26babd00688"
             ],
-            "version": "==0.3.8"
+            "version": "==0.3.9"
         },
         "markupsafe": {
             "hashes": [
@@ -454,10 +454,10 @@
         },
         "pipenv": {
             "hashes": [
-                "sha256:7dd49a7345fa5da7843907bab42a996dece474e45dd309dbd7619739dc60478b",
-                "sha256:cc289dc78feaa14def4e1723b0b4d85ff628c8e5f740eeeb68197b90dafa8dff"
+                "sha256:448ac3a36443db633d52a2359cac15ecbc4f429eab4ddd420697602b721d1c5a",
+                "sha256:eff0e10eadb330f612edfa5051d3d8e775e9e0e918c3c50361da703bd0daa035"
             ],
-            "version": "==2020.6.2"
+            "version": "==2020.8.13"
         },
         "pkginfo": {
             "hashes": [
@@ -705,10 +705,10 @@
         },
         "tox": {
             "hashes": [
-                "sha256:3d914480c46232c2d1a035482242535a26d76cc299e4fd28980c858463206f45",
-                "sha256:5c82e40046a91dbc80b6bd08321b13b4380d8ce3bcb5b62616cb17aaddefbb3a"
+                "sha256:17e61a93afe5c49281fb969ab71f7a3f22d7586d1c56f9a74219910f356fe7d3",
+                "sha256:3d94b6921a0b6dc90fd8128df83741f30bb41ccd6cd52d131a6a6944ca8f16e6"
             ],
-            "version": "==3.18.1"
+            "version": "==3.19.0"
         },
         "tox-pipenv": {
             "hashes": [
