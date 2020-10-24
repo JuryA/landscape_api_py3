@@ -722,11 +722,11 @@
         },
         "tox-pipenv": {
             "hashes": [
-                "sha256:23c44c787e6ab2f2b00e9a68820dde677fd93345d74edbd27cc19bc035a99b18",
-                "sha256:4d3207954d97f52abe8835d8538916f4d34975de2329d0cdef611cfb93355542"
+                "sha256:5fe576294be7a5a14ba4bdea729d9c738e6c7d423ab84273c9b106d5b2508999",
+                "sha256:f51476491b52c22455fe37f31aa1a0c5aa9798d223f19be58dfadcf79e503362"
             ],
             "index": "pypi",
-            "version": "==1.10.0"
+            "version": "==1.10.1"
         },
         "tqdm": {
             "hashes": [
