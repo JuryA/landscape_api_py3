@@ -5,14 +5,14 @@ schedule: "every week on sunday"
 search: False
 
 requirements:
-  - requirements-dev.txt
+  - requirements-dev.txt:
       update: insecure
       pin: False
-  - requirements.txt
+  - requirements.txt:
       update: True
       pin: True
  
 label_prs: 
   - automerge
   - dependencies
- 
+bug: 
