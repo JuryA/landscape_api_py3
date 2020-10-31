@@ -10,6 +10,9 @@ updates:
     schedule:
       # Check for updates to GitHub Actions every weekday
       interval: "daily"
+    labels:
+      - "automerge"
+      - "github_actions"
 
   - package-ecosystem: "pip" # See documentation for possible values
     directory: "/" # Location of package manifests
