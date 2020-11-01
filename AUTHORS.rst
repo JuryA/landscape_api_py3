@@ -5,7 +5,7 @@ Credits
 Development Lead
 ----------------
 
-* Jiří Altman <jiri.altman@konicaminolta.cz>
+* Jiří Altman <altman.jiri@gmail.com>
 
 Contributors
 ------------
