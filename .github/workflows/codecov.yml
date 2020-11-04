@@ -10,7 +10,7 @@ jobs:
       OS: ${{ matrix.os }}
       PYTHON: '3.7'
     steps:
-    - uses: actions/checkout@v2.3.3
+    - uses: actions/checkout@v2.3.4
     - name: Setup Python
       uses: actions/setup-python@v2.1.4
       with:
