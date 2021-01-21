@@ -121,12 +121,13 @@ def fetch(url, post_body, headers, connect_timeout=30, total_timeout=600, cainfo
 
     session = requests.session()
 
+    headers["Content-type"] = "application/x-www-form-urlencoded"
     if headers:
         session.headers.update(headers)
 
     response = session.post(
         url,
-        params=post_body,
+        data=post_body.encode("utf-8"),
         allow_redirects=True,
         timeout=(connect_timeout, total_timeout),
         verify=cainfo,
@@ -614,7 +615,11 @@ def api_factory(schema, version=LATEST_VERSION):
         positional_parameters.extend(optional_parameters)
 
         caller = _change_function(
-            _caller, str(method_name), positional_parameters, defaults, action_name,
+            _caller,
+            str(method_name),
+            positional_parameters,
+            defaults,
+            action_name,
         )
         caller.__doc__ = _generate_doc(action)
         return caller
