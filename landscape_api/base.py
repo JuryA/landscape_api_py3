@@ -864,7 +864,7 @@ class SchemaParameterAction(argparse.Action):
 
     def parse_boolean(self, parameter, value):
         # This is only used for required arguments
-        return True if value == "true" else False
+        return value == "true"
 
     def parse_list(self, parameter, value):
         """Parse a comma-separated list of values converting it to a C{list}.
