@@ -555,7 +555,7 @@ class _API(object):
         with open(value, "rb") as the_file:
             contents = the_file.read()
         encoded_contents = b64encode(contents)
-        return {name: encoded_contents.encode("utf-8")}
+        return {name: encoded_contents}
 
     def _encode_structure(self, parameter, name, dictionary):
         return self._encode_struct_fields(
