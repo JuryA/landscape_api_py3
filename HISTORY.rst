@@ -2,6 +2,10 @@
 History
 =======
 
+v0.7.1 (2021-01-27)
+-------------------
+- fixed documentation
+
 v0.7.0 (2021-01-27)
 -------------------
 - fix #245: CreateScript endpoint raises exception (solution suggested and tested)
