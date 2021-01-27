@@ -614,7 +614,11 @@ def api_factory(schema, version=LATEST_VERSION):
         positional_parameters.extend(optional_parameters)
 
         caller = _change_function(
-            _caller, str(method_name), positional_parameters, defaults, action_name,
+            _caller,
+            str(method_name),
+            positional_parameters,
+            defaults,
+            action_name,
         )
         caller.__doc__ = _generate_doc(action)
         return caller
