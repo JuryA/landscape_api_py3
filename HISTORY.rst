@@ -2,6 +2,13 @@
 History
 =======
 
+v0.7.0 (2021-01-27)
+-------------------
+- fix #245: CreateScript endpoint raises exception (solution suggested and tested)
+- fix #246: CreateScriptAttachment endpoint raises exception (solution suggested and tested)
+- minor format change
+- add pyproject.toml
+
 v0.6.1 (2020-06-17)
 -------------------
 - fix #19
