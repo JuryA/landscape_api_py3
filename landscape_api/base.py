@@ -121,12 +121,13 @@ def fetch(url, post_body, headers, connect_timeout=30, total_timeout=600, cainfo
 
     session = requests.session()
 
+    headers["Content-type"] = "application/x-www-form-urlencoded"
     if headers:
         session.headers.update(headers)
 
     response = session.post(
         url,
-        params=post_body,
+        data=post_body.encode("utf-8"),
         allow_redirects=True,
         timeout=(connect_timeout, total_timeout),
         verify=cainfo,
@@ -554,7 +555,7 @@ class _API(object):
         with open(value, "rb") as the_file:
             contents = the_file.read()
         encoded_contents = b64encode(contents)
-        return {name: encoded_contents.encode("utf-8")}
+        return {name: encoded_contents}
 
     def _encode_structure(self, parameter, name, dictionary):
         return self._encode_struct_fields(
@@ -863,7 +864,7 @@ class SchemaParameterAction(argparse.Action):
 
     def parse_boolean(self, parameter, value):
         # This is only used for required arguments
-        return True if value == "true" else False
+        return value == "true"
 
     def parse_list(self, parameter, value):
         """Parse a comma-separated list of values converting it to a C{list}.
