@@ -140,7 +140,7 @@ travis==0.0.3
 
 twine==3.2.0
 
-typed-ast==1.4.3
+typed-ast==1.5.4
 
 typing-extensions==3.7.4.3
 
