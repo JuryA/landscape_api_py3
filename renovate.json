@@ -1,10 +1,12 @@
 {
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
-  "extends": ["local>org-name/.github:renovate-config"],
-  "packageRules": [
+   "extends": [
+        "config:base"
+    ]
+    "packageRules": [
     {
       "matchPackagePatterns": ["*"],
-      "automerge": false
+      "automerge": true
     }
   ]
 }
