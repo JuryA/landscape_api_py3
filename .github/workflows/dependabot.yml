@@ -25,7 +25,7 @@ jobs:
          #   - name: Dependabot Auto Merge
          #     uses: ahmadnassri/action-dependabot-auto-merge@v2.3.1
             - name: automerge
-              uses: "pascalgn/automerge-action@v0.13.0"
+              uses: "pascalgn/automerge-action@v0.15.3"
               env:
                   GITHUB_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
                   MERGE_LABELS: "automerge"
