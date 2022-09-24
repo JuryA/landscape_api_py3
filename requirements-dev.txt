@@ -30,7 +30,7 @@ click==8.1.3; python_version >= '2.7' and python_version not in '3.0, 3.1, 3.2, 
 
 colorama==0.4.4; platform_system == 'Windows' and sys_platform == 'win32' and sys_platform == 'win32'
 
-coverage==6.4.3
+coverage==6.4.4
 
 distlib==0.3.6
 
@@ -56,7 +56,7 @@ keyring==21.4.0; python_version >= '3.6'
 
 markupsafe==1.1.1; python_version >= '2.7' and python_version not in '3.0, 3.1, 3.2, 3.3'
 
-mccabe==0.6.1
+mccabe==0.7.0
 
 more-itertools==8.14.0; python_version >= '3.5'
 
@@ -82,7 +82,7 @@ pre-commit==2.20.0
 
 py==1.10.0; python_version >= '2.7' and python_version not in '3.0, 3.1, 3.2, 3.3'
 
-pycodestyle==2.6.0; python_version >= '2.7' and python_version not in '3.0, 3.1, 3.2, 3.3'
+pycodestyle==2.9.1; python_version >= '2.7' and python_version not in '3.0, 3.1, 3.2, 3.3'
 
 pyflakes==2.2.0; python_version >= '2.7' and python_version not in '3.0, 3.1, 3.2, 3.3'
 
