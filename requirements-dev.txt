@@ -114,7 +114,7 @@ snowballstemmer==2.2.0
 
 sphinx-epytext==0.0.4
 
-sphinx==5.1.1
+sphinx==6.1.2
 
 sphinxcontrib-applehelp==1.0.2; python_version >= '3.5'
 
