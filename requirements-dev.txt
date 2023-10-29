@@ -22,7 +22,7 @@ bump2version==1.0.1
 
 certifi==2022.9.24
 
-cfgv==3.3.1; python_full_version >= '3.6.1'
+cfgv==3.4.0; python_full_version >= '3.6.1'
 
 chardet==3.0.4
 
