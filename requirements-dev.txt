@@ -86,7 +86,7 @@ pycodestyle==2.9.1; python_version >= '2.7' and python_version not in '3.0, 3.1,
 
 pyflakes==2.2.0; python_version >= '2.7' and python_version not in '3.0, 3.1, 3.2, 3.3'
 
-pygments==2.13.0; python_version >= '3.5'
+pygments==2.19.1; python_version >= '3.5'
 
 pyparsing==3.0.9; python_version >= '2.6' and python_version not in '3.0, 3.1, 3.2, 3.3'
 
