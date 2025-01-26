@@ -4,7 +4,7 @@
 
 2to3==1.0
 
-alabaster==0.7.12
+alabaster==0.7.16
 
 appdirs==1.4.4
 
