@@ -138,7 +138,7 @@ tqdm==4.51.0; python_version >= '2.6' and python_version not in '3.0, 3.1, 3.2, 
 
 travis==0.0.3
 
-twine==4.0.1
+twine==4.0.2
 
 typed-ast==1.5.4
 
